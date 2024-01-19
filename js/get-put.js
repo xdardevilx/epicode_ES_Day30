@@ -152,4 +152,29 @@ const editButton = function (product) {
   });
 };
 
+const deleteButton = function (product) {
+  const button = document.getElementById("delete-button");
+  button.addEventListener("click", function (e) {
+    e.preventDefault();
+    fetch(url + "/" + params, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("cancellato!");
+          location.assign("./index.html");
+        } else {
+          alert("problema nella cancellazione :(");
+          throw new Error("errore nella cancellazione");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+
 fetchFunction();
