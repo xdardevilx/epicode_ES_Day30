@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="./assets/mystyle.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg text-bg-danger">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./index.html">ShoppeOnline</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="./index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Backoffice</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="text-bg-dark bck-img-office">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col col-12 col-md-6 text-center">
+            <h1>ShoppeOnline</h1>
+            <h2>L'unico negozio online che non vende</h2>
+          </div>
+        </div>
+        <div class="row mt-3 justify-content-center">
+          <div class="col col-12 col-md-8 border p-3">
+            <h2 id="form-title">Form inserimento prodotti</h2>
+            <form id="product-form">
+              <div class="mb-3">
+                <label for="name" class="form-label">Nome</label>
+                <input
+                  class="form-control"
+                  id="name"
+                  aria-describedby="emailHelp"
+                  required />
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Descrizione</label>
+                <input
+                  class="form-control"
+                  id="description"
+                  aria-describedby="emailHelp"
+                  required />
+              </div>
+              <div class="mb-3">
+                <label for="brand" class="form-label">marca</label>
+                <input
+                  class="form-control"
+                  id="brand"
+                  aria-describedby="emailHelp"
+                  required />
+              </div>
+              <div class="mb-3">
+                <label for="img" class="form-label">Immagini</label>
+                <input class="form-control" type="text" id="img" />
+              </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Prezzo</label>
+                <input
+                  type="number"
+                  min="0"
+                  class="form-control"
+                  id="price"
+                  aria-describedby="emailHelp"
+                  required />
+              </div>
+              <button type="submit" class="btn btn-primary">Invia</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+    <script src="./js/post.js"></script>
+  </body>
+</html>

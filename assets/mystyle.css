@@ -1,0 +1,14 @@
+.bck-img {
+  background-image: url(./img/disposizione-dei-carrelli-della-spesa-del-venerdi-nero-con-lo-spazio-della-copia.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.bck-img-office {
+  background-image: url(./img/03092022_rorozoa_10.jpg);
+  background-size: cover;
+  background-position: center;
+  
+}
+#product-form{
+  opacity: 0.8;
+}
