@@ -1,8 +1,6 @@
 let road = new URL(document.location).searchParams;
 let params = road.get("productID");
 console.log(params);
-const myUrl = "https://striveschool-api.herokuapp.com/api/product/";
-
 const url = "https://striveschool-api.herokuapp.com/api/product/";
 const token =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWFhNDA5MzE4N2U1YzAwMTgxNGM2MWYiLCJpYXQiOjE3MDU2NjIyMTQsImV4cCI6MTcwNjg3MTgxNH0.FA8KAYmJ9TzN___iR9LYQx16Xl9nB7ASL-rMDShwx9o";
@@ -43,6 +41,7 @@ const addCard = function (imageUrl, nome, brand, description, prezzo) {
             </button>           
       </div>`;
 };
+
 const fetchFunction = function () {
   fetch(url + "/" + params, {
     headers: {
@@ -65,10 +64,11 @@ const fetchFunction = function () {
         product.description,
         product.price
       );
-      editButton();
+      editButton(product);
     });
 };
-const addForm = function () {
+
+const addForm = function (product) {
   const row = document.getElementById("products-row");
   const newCol = document.createElement("div");
   const card = document.createElement("div");
@@ -77,141 +77,78 @@ const addForm = function () {
   row.appendChild(newCol);
   newCol.appendChild(card);
   card.innerHTML = `
-  <form id="edit-form">
-            <div class="mb-3">
-              <label for="productname" class="form-label"
-                >Inserisci il Nome prodotto</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="productname"
-                aria-describedby="name"
-                required />
-            </div>
-
-            <div class="mb-3">
-              <label for="description" class="form-label"
-                >Inserisci la Descrizione dell'articolo</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="description"
-                required />
-            </div>
-            <div class="mb-3">
-              <label for="brand" class="form-label"
-                >Inserisci la marca dell'articolo</label
-              >
-              <input type="text" class="form-control" id="brand" required />
-            </div>
-            <div class="mb-3">
-              <label for="image Src" class="form-label"
-                >Inserisci la Sorgente dell'immagine ...jpeg,png</label
-              >
-              <input type="text" class="form-control" id="imageSrc" required />
-            </div>
-            <div class="mb-3">
-              <label for="price" class="form-label"
-                >Inserisci il prezzo dell'articolo</label
-              >
-              <input type="number" class="form-control" id="price" required />
-            </div>
-            <div class="mb-3 form-check">
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="exampleCheck1" />
-              <label class="form-check-label" for="exampleCheck1"
-                >Conferma</label
-              >
-            </div>
-            <button type="submit" class="btn btn-primary">Salva</button>
-          </form>`;
+    <form id="edit-form">
+      <div class="mb-3">
+        <label for="productname" class="form-label">Inserisci il Nome prodotto</label>
+        <input type="text" class="form-control" id="productname" value="${product.name}" required />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Inserisci la Descrizione dell'articolo</label>
+        <input type="text" class="form-control" id="description" value="${product.description}" required />
+      </div>
+      <div class="mb-3">
+        <label for="brand" class="form-label">Inserisci la marca dell'articolo</label>
+        <input type="text" class="form-control" id="brand" value="${product.brand}" required />
+      </div>
+      <div class="mb-3">
+        <label for="imageSrc" class="form-label">Inserisci la Sorgente dell'immagine ...jpeg,png</label>
+        <input type="text" class="form-control" id="imageSrc" value="${product.imageUrl}" required />
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Inserisci il prezzo dell'articolo</label>
+        <input type="number" class="form-control" id="price" value="${product.price}" required />
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+        <label class="form-check-label" for="exampleCheck1">Conferma</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Salva</button>
+    </form>`;
 };
 
-const takeElemnt = (product) => {
-  let productName = document.getElementById("productname");
-  let description = document.getElementById("description");
-  let brand = document.getElementById("brand");
-  let img = document.getElementById("imageSrc");
-  let price = document.getElementById("price");
-
-  productName.value = product.name;
-  description.value = product.description;
-  brand.value = product.brand;
-  img.value = product.imageUrl;
-  price.value = product.price;
-};
-
-const editButton = function () {
+const editButton = function (product) {
   const button = document.getElementById("edit-button");
   button.addEventListener("click", (e) => {
-    e.preventDefault;
-    addForm();
+    e.preventDefault();
+    addForm(product);
 
     const form = document.getElementById("edit-form");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const productName = document.getElementById("productname");
-      const description = document.getElementById("description");
-      const brand = document.getElementById("brand");
-      const img = document.getElementById("imageSrc");
-      const price = document.getElementById("price");
+      const productName = document.getElementById("productname").value;
+      const description = document.getElementById("description").value;
+      const brand = document.getElementById("brand").value;
+      const img = document.getElementById("imageSrc").value;
+      const price = document.getElementById("price").value;
+
       const newProducts = {
-        name: productName.value,
-        description: description.value,
-        brand: brand.value,
-        imageUrl: img.value,
-        price: price.value,
+        name: productName,
+        description: description,
+        brand: brand,
+        imageUrl: img,
+        price: price,
       };
-      takeElemnt();
 
-      fetch(url + "/" + params, {
-        method: "PUT",
-        body: JSON.stringify(newProducts),
-        headers: {
-          Authorization: token,
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Something went wrong");
-          }
-        })
-        .then((response) => {
-          console.log(response);
+      try {
+        const response = await fetch(url + "/" + params, {
+          method: "PUT",
+          body: JSON.stringify(newProducts),
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
         });
+
+        if (response.ok) {
+          const updatedProduct = await response.json();
+          console.log(updatedProduct);
+        } else {
+          throw new Error("Something went wrong");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     });
-    // const newProducts = {
-    //   name: productName.value,
-    //   description: description.value,
-    //   brand: brand.value,
-    //   imageUrl: img.value,
-    //   price: price.value,
-    // }
-
-    // fetch(url + "/" + params, {
-    //   method: "PUT",
-    //   // body: JSON.stringify(newProducts),
-    //   headers: {
-    //     Authorization: token,
-    //   },
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       return response.json();
-    //     } else {
-    //       throw new Error("Something went wrong");
-    //     }
-    //   })
-    //   .then((product) => {
-    // takeElemnt(product);
-
-    //   });
   });
 };
 
